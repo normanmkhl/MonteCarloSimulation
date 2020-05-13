@@ -258,7 +258,7 @@ def bettingmachine(value,initialwager,wager_count,color):
     if value <= 0:
         value = 0
         machine_busts += 1
-        #value = "\u001b[31mB R O K E || N I G G A\u001b[35;1m"
+        #value = "\u001b[31mB R O K E\u001b[35;1m"
     #print("Funds : " + "\u001b[36;1m " + str(value) + "\u001b[35;1m")
     plt.plot(wX,vY,color)
     if value > funds:
