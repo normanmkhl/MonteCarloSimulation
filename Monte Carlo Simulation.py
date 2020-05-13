@@ -3,6 +3,7 @@ import os
 import matplotlib
 import matplotlib.pyplot as plt
 import time
+import csv
 
 lower_bust = 31.235
 higher_profit = 63.208
@@ -291,7 +292,7 @@ while True:
         dAlembert(startingFunds,wagerSize,wagerCount)
         counter += 1
 
-    ROI = Return - (daSampSize - startingFunds)
+    ROI = Return - (daSampSize * startingFunds)
     totalInvested = daSampSize * startingFunds
     percentROI = (ROI/totalInvested) * 100.00
 
@@ -330,6 +331,7 @@ while True:
         saveLine = "\n" + str(percentROI) + "," + str(wagerSizePercent) + "," + str(wagerCount) + ",r"
         saveFile.write(saveLine)
         saveFile.close()
+
 
 '''while True:
     multiple_busts = 0.0
