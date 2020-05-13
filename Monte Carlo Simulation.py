@@ -72,7 +72,7 @@ def multiplebettor(funds,initial_wager,wager_count):
         elif previousWager == "loss":
             # print("YOU LOST")
             if randomDice():
-                wager = previousWagerAmount * random_multiple
+                #wager = previousWagerAmount * random_multiple
 
                 if (value - wager) < 0:
                     wager = value
@@ -84,7 +84,7 @@ def multiplebettor(funds,initial_wager,wager_count):
                 wX.append(currentwager)
                 vY.append(value)
             else:
-                wager = previousWagerAmount * random_multiple
+                #wager = previousWagerAmount * random_multiple
                 if (value - wager) < 0:
                     wager = value
                 # print("YOU LOST", wager)
@@ -284,7 +284,7 @@ while True:
     Return = 0.0
     da_busts = 0.0
     da_profits = 0.0
-    daSampSize = 1000
+    daSampSize = 10000
 
     counter = 1
     while counter <= daSampSize:
@@ -293,10 +293,11 @@ while True:
 
     ROI = Return - (daSampSize - startingFunds)
     totalInvested = daSampSize * startingFunds
-
     percentROI = (ROI/totalInvested) * 100.00
 
-    if percentROI > 0.865:
+    wagerSizePercent = (wagerSize/startingFunds)*100.00
+
+    if percentROI > 1:
         print("#######################################################")
         print("Total invested : ", daSampSize * startingFunds)
         print("Total Return : ", Return)
@@ -306,7 +307,29 @@ while True:
         print("Profit Rate : ", (da_profits/daSampSize)* 100.00)
         print("Wager size : ",wagerSize)
         print("Wager count : ", wagerCount)
-        print("Wager size percentage : ", (wagerSize / startingFunds) * 100.00)
+        print("Wager size percentage : ", wagerSizePercent)
+
+        saveFile = open("monteCarloLiberal.csv","a")
+        saveLine = "\n"+str(percentROI) + "," + str(wagerSizePercent) + "," + str(wagerCount) + ",g"
+        saveFile.write(saveLine)
+        saveFile.close()
+
+    elif percentROI < -1:
+        print("#######################################################")
+        print("Total invested : ", daSampSize * startingFunds)
+        print("Total Return : ", Return)
+        print("Return on Investment : ", Return - (daSampSize - startingFunds))
+        print("Percent ROI : ", percentROI)
+        print("Bust Rate : ", (da_busts / daSampSize) * 100.00)
+        print("Profit Rate : ", (da_profits / daSampSize) * 100.00)
+        print("Wager size : ", wagerSize)
+        print("Wager count : ", wagerCount)
+        print("Wager size percentage : ", wagerSizePercent)
+
+        saveFile = open("monteCarloLiberal.csv", "a")
+        saveLine = "\n" + str(percentROI) + "," + str(wagerSizePercent) + "," + str(wagerCount) + ",r"
+        saveFile.write(saveLine)
+        saveFile.close()
 
 '''while True:
     multiple_busts = 0.0
